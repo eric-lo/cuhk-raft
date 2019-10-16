@@ -1,0 +1,208 @@
+syntax = "proto3";
+package raft;
+
+// Generate stub by command : protoc pb.proto --go_out=plugins=grpc:.
+
+service RaftNode{
+
+    // Desc:
+    // Propose initializes proposing a new operation, and replies with the
+    // result of committing this operation. Propose should not return until
+    // this operation has been committed, or this node is not leader now.
+    //
+    // If the we put a new <k, v> pair or deleted an existing <k, v> pair
+    // successfully, it should return OK; If it tries to delete an non-existing
+    // key, a KeyNotFound should be returned; If this node is not leader now,
+    // it should return WrongNode as well as the currentLeader id.
+    //
+    // Params:
+    // args: the operation to propose
+    // reply: as specified in Desc
+    rpc Propose(ProposeArgs) returns (ProposeReply);
+
+    // Desc:GetValue
+    // GetValue looks up the value for a key, and replies with the value or with
+    // the Status KeyNotFound.
+    //
+    // Params:
+    // args: the key to check
+    // reply: the value and status for this lookup of the given key
+    rpc GetValue(GetValueArgs) returns (GetValueReply);
+
+    // Desc:
+    // Set both the the electionTimeoutLow and electionTimeoutHigh of this node to be args.Timeout.
+    // You also need to stop current timer and reset it to fire after args.Timeout milliseconds.
+    //
+    // Params:
+    // args: the election timeout duration
+    // reply: no use
+    rpc SetElectionTimeout(SetElectionTimeoutArgs) returns (SetElectionTimeoutReply);
+
+    // Desc:
+    // Set heartBeatInterval as args.Interval milliseconds.
+    // You also need to stop current ticker and reset it to fire every args.Interval milliseconds.
+    //
+    // Params:
+    // args: the heartbeat duration
+    // reply: no use
+    rpc SetHeartBeatInterval(SetHeartBeatIntervalArgs) returns (SetHeartBeatIntervalReply);
+
+    // Desc:
+    // Receive a RequestVote message from another Raft Node. Check the paper for more details.
+    //
+    // Params:
+    // args: the RequestVote Message, you must include From(src node id) and To(dst node id) when
+    // you call this API
+    //
+    // Return:
+    // reply: the RequestVote Reply Message
+    rpc RequestVote(RequestVoteArgs) returns (RequestVoteReply);
+
+    // Desc:
+    // Receive a AppendEntries message from another Raft Node. Check the paper for more details.
+    //
+    // Params:
+    // args: the AppendEntries M/essage, you must include From(src node id) and To(dst node id) when
+    // you call this API
+    // reply: the AppendEntries Reply Message
+    rpc AppendEntries(AppendEntriesArgs) returns (AppendEntriesReply);
+
+    // Desc:
+    // For testing purpose only. You should implement it and reply nil directly,
+    rpc CheckEvents(CheckEventsArgs) returns (CheckEventsReply);
+}
+
+message CheckEventsArgs{
+    map<string, int32> RequestVoteSchema = 1;
+    map<string, int32> AppendEntriesSchema = 2;
+    repeated Event ExpectedEvents = 3;
+}
+
+message CheckEventsReply{
+    bool Success = 1;
+    string ErrMsg = 2;
+}
+
+message ProposeArgs{
+    Operation Op = 1;
+    string key = 2;
+    int32 V = 3;
+}
+
+enum Role {
+    Follower = 0;
+    Candidate = 1;
+    Leader = 2;
+}
+
+enum Operation{
+    Put = 0;
+    Delete = 1;
+}
+
+enum Status{
+    OK = 0;
+    KeyFound = 1;
+    KeyNotFound = 2;
+    WrongNode = 3;
+}
+
+enum MsgName{
+    RequestVote = 0;
+    AppendEntries = 1;
+}
+
+message ProposeReply{
+    int32 CurrentLeader = 1;
+    Status Status = 2;
+}
+
+message GetValueArgs{
+    string Key = 1;
+}
+
+message GetValueReply{
+    int32 V = 1;
+    Status Status = 2;
+}
+
+message LogEntry{
+    int32 Term = 1;
+    Operation Op = 2;
+    string Key = 3;
+    int32 Value = 4;
+}
+
+message RequestVoteArgs{
+    int32 From = 1;
+    int32 To = 2;
+    int32 Term = 3;
+    int32 CandidateId = 4;
+    int32 LastLogIndex = 5;
+    int32 LastLogTerm = 6;
+}
+
+message RequestVoteReply{
+    int32 From = 1;
+    int32 To = 2;
+    int32 Term = 3;
+    bool VoteGranted = 4;
+}
+
+message AppendEntriesArgs {
+    int32 From = 1 ;
+    int32 To = 2 ;
+    int32 Term = 3 ;
+    int32 LeaderId = 4;
+    int32 PrevLogIndex = 5;
+    int32 PrevLogTerm = 6;
+    repeated LogEntry Entries = 7;
+    int32 LeaderCommit = 8;
+}
+
+message AppendEntriesReply{
+    int32 From = 1;
+    int32 To = 2;
+    int32 Term = 3;
+    bool Success = 4;
+    int32 MatchIndex = 5;
+}
+
+message SetElectionTimeoutArgs{
+    int32 Timeout = 1;
+}
+
+message SetElectionTimeoutReply{
+}
+
+message SetHeartBeatIntervalArgs{
+    int32 Interval = 1;
+}
+
+message SetHeartBeatIntervalReply{
+}
+
+message Event{
+    MsgName Msg = 1;
+    int32 From = 2;
+    int32 To = 3;
+
+    int32 Term = 4;
+
+    int32 CandidateId = 5;
+    int32 LastLogIndex = 6;
+    int32 LastLogTerm = 7;
+
+    bool VoteGranted = 8;
+
+    int32 LeaderId = 9;
+    int32 PrevLogIndex = 10;
+    int32 PrevLogTerm = 11;
+    repeated LogEntry Entries = 12;
+    int32 LeaderCommit = 13;
+
+    bool Success = 14;
+    int32 MatchIndex = 15;
+
+    bool IsResponse = 16;
+}
