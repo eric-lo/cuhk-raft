@@ -32,3 +32,7 @@ pkg
 .svn
 
 go.sum
+
+*/target/
+
+*.iml
