@@ -161,7 +161,7 @@ public class RaftRunner {
     // you call this API
     // reply: the RequestVote Reply Message
     @Override
-    public void recvRequestVote(RequestVoteArgs request,
+    public void requestVote(RequestVoteArgs request,
         StreamObserver<RequestVoteReply> responseObserver) {
       // TODO: Implement this!
     }
@@ -174,7 +174,7 @@ public class RaftRunner {
     // you call this API
     // reply: the AppendEntries Reply Message
     @Override
-    public void recvAppendEntries(AppendEntriesArgs request,
+    public void appendEntries(AppendEntriesArgs request,
         StreamObserver<AppendEntriesReply> responseObserver) {
       // TODO: Implement this!
     }
@@ -187,7 +187,7 @@ public class RaftRunner {
     // args: the heartbeat duration
     // reply: no use
     @Override
-    public void recvSetElectionTimeout(SetElectionTimeoutArgs request,
+    public void setElectionTimeout(SetElectionTimeoutArgs request,
         StreamObserver<SetElectionTimeoutReply> responseObserver) {
       // TODO: Implement this!
     }
@@ -200,7 +200,7 @@ public class RaftRunner {
     // args: the heartbeat duration
     // reply: no use
     @Override
-    public void recvSetHeartBeatInterval(SetHeartBeatIntervalArgs request,
+    public void setHeartBeatInterval(SetHeartBeatIntervalArgs request,
         StreamObserver<SetHeartBeatIntervalReply> responseObserver) {
       // TODO: Implement this!
     }

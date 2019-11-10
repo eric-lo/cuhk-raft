@@ -36,7 +36,7 @@ service RaftNode{
     // Params:
     // args: the election timeout duration
     // reply: no use
-    rpc RecvSetElectionTimeout(SetElectionTimeoutArgs) returns (SetElectionTimeoutReply);
+    rpc SetElectionTimeout(SetElectionTimeoutArgs) returns (SetElectionTimeoutReply);
 
     // Desc:
     // Set heartBeatInterval as args.Interval milliseconds.
@@ -45,10 +45,10 @@ service RaftNode{
     // Params:
     // args: the heartbeat duration
     // reply: no use
-    rpc RecvSetHeartBeatInterval(SetHeartBeatIntervalArgs) returns (SetHeartBeatIntervalReply);
+    rpc SetHeartBeatInterval(SetHeartBeatIntervalArgs) returns (SetHeartBeatIntervalReply);
 
     // Desc:
-    // Receive a RecvRequestVote message from another Raft Node. Check the paper for more details.
+    // Receive a RequestVote message from another Raft Node. Check the paper for more details.
     //
     // Params:
     // args: the RequestVote Message, you must include From(src node id) and To(dst node id) when
@@ -56,16 +56,16 @@ service RaftNode{
     //
     // Return:
     // reply: the RequestVote Reply Message
-    rpc RecvRequestVote(RequestVoteArgs) returns (RequestVoteReply);
+    rpc RequestVote(RequestVoteArgs) returns (RequestVoteReply);
 
     // Desc:
-    // Receive a RecvAppendEntries message from another Raft Node. Check the paper for more details.
+    // Receive a AppendEntries message from another Raft Node. Check the paper for more details.
     //
     // Params:
-    // args: the AppendEntries Message, you must include From(src node id) and To(dst node id) when
+    // args: the AppendEntries M/essage, you must include From(src node id) and To(dst node id) when
     // you call this API
     // reply: the AppendEntries Reply Message
-    rpc RecvAppendEntries(AppendEntriesArgs) returns (AppendEntriesReply);
+    rpc AppendEntries(AppendEntriesArgs) returns (AppendEntriesReply);
 
     // Desc:
     // For testing purpose only. You should implement it and reply nil directly,
