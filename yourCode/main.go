@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"csci4160/asgn2/raft"
+	"csci4160/asgn1/raft"
 	"fmt"
 	"google.golang.org/grpc"
 	"log"
