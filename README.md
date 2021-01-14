@@ -1,4 +1,4 @@
-# CUHK - CSCI4160 Fall 2019 Assignment 2
+# CUHK - CSCI4160 Spring 2021 Assignment 1
 
 ## Consensus protocol, gRPC  
 
