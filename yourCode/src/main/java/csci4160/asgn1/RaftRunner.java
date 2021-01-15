@@ -1,4 +1,4 @@
-package csci4160.asgn2;
+package csci4160.asgn1;
 
 import io.grpc.Channel;
 import io.grpc.ManagedChannelBuilder;
