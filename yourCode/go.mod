@@ -1,4 +1,4 @@
-module csci4160/asgn1
+module cuhk/asgn
 
 go 1.13
 
