@@ -10,7 +10,7 @@ package raftproxy
 
 import (
 	"context"
-	"csci4160Raft/tests/raft"
+	"cuhk/tests/raft"
 	"fmt"
 	"google.golang.org/grpc"
 	"log"

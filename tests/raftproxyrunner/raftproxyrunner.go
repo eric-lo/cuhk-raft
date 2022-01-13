@@ -8,7 +8,7 @@ package main
 *			Runner for launching new proxy upon a raft node
  */
 import (
-	"csci4160Raft/tests/raftproxy"
+	"cuhk/tests/raftproxy"
 	"flag"
 	"fmt"
 	"log"

@@ -48,7 +48,7 @@ package main
 
 import (
 	"context"
-	"csci4160Raft/tests/raft"
+	"cuhk/tests/raft"
 	"errors"
 	"flag"
 	"fmt"
