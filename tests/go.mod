@@ -1,4 +1,4 @@
-module csci4160Raft/tests
+module cuhk/tests
 
 go 1.13
 

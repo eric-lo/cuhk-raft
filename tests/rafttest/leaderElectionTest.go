@@ -9,7 +9,7 @@ package main
  */
 
 import (
-	"csci4160Raft/tests/raft"
+	"cuhk/tests/raft"
 	"time"
 )
 
