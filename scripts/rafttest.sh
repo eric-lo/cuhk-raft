@@ -11,6 +11,7 @@ sh $BASE_PATH/yourCode/compile.sh
 # Build the proxy runner
 # Exit immediately if there was a compile-time error.
 cd  $BASE_PATH/tests
+go mod tidy
 go build -o $BIN_PATH/raftproxyrunner $BASE_PATH/tests/raftproxyrunner
 if [ $? -ne 0 ]; then
    echo "FAIL: code does not compile"
