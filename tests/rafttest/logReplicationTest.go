@@ -10,7 +10,7 @@ package main
 
 import (
 	crand "crypto/rand"
-	"csci4160Raft/tests/raft"
+	"cuhk/tests/raft"
 	"math"
 	"math/big"
 	"math/rand"
