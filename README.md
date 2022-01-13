@@ -1,6 +1,6 @@
-# CUHK - CSCI4160 Spring 2021 Assignment 1
+# CUHK - Spring 2022 Raft Assignment
 
-## Consensus protocol, gRPC  
+## Consensus protocol, gRPC
 
 Work on the folder, `yourCode` and pass all the test cases in the tester.
 
