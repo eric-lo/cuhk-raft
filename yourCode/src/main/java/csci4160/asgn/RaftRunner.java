@@ -1,4 +1,4 @@
-package csci4160.asgn1;
+package cuhk.asgn;
 
 import io.grpc.Channel;
 import io.grpc.ManagedChannelBuilder;

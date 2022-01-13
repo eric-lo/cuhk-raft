@@ -11,6 +11,6 @@ if [ $? -ne 0 ]; then
    exit $?
 fi
 
-echo "exec java -cp ${BASE_PATH}/target/asgn1-1-jar-with-dependencies.jar csci4160.asgn1.RaftRunner \$1 \$2 \$3 \$4 \$5" > $BIN_PATH/raftrunner
+echo "exec java -cp ${BASE_PATH}/target/asgn-1-jar-with-dependencies.jar cuhk.asgn.RaftRunner \$1 \$2 \$3 \$4 \$5" > $BIN_PATH/raftrunner
 chmod +x $BIN_PATH/raftrunner
 cd --
